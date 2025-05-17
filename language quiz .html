@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LingwangHero Game</title>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Serif&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'PT Serif', serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+        }
+        h2 {
+            text-align: center;
+            color: #800000;
+            margin-top: 20px;
+        }
+        #quiz-container {
+            max-width: 600px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: #fff;
+            border: 2px solid #800000;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            margin: 8px 0;
+            border: 1px solid #333;
+            background-color: #f1f1f1;
+            cursor: pointer;
+            border-radius: 6px;
+        }
+        button:hover {
+            background-color: #ddd;
+        }
+        #feedback {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        #next-btn {
+            background-color: #800000;
+            color: white;
+        }
+        #next-btn:hover {
+            background-color: #a00000;
+        }
+    </style>
+</head>
+<body>
+    <h2>LingwaHero: Language Quiz</h2>
+    <div id="quiz-container">
+        <p id="question">Loading question...</p>
+        <div id="answers"></div>
+        <p id="feedback"></p>
+        <button id="next-btn" style="display:none;" onclick="nextQuestion()">Next</button>
+    </div>
+
+    <script src="quiz.js"></script>
+</body>
+</html>

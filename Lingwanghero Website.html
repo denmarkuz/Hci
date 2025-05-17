@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="fil">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>LingwangHero</title>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Merriweather', serif;
+      margin: 0;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+
+    header {
+      background-color: #b22222;
+      color: white;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.8rem;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      margin-top: 0.5rem;
+
+    }
+
+    nav {
+      background-color: #8b0000;
+      display: flex;
+      justify-content: center;
+      padding: 0.5rem 0;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
+    }
+
+    .main-content {
+      flex: 3;
+      padding-right: 2rem;
+    }
+
+    .sidebar {
+      flex: 1;
+      background-color: #fff8f0;
+      padding: 1rem;
+      border-left: 3px solid #ff4500;
+      border-radius: 8px;
+    }
+
+    .search-section {
+      margin-bottom: 2rem;
+    }
+
+    .search-box {
+      display: flex;
+      margin-bottom: 1rem;
+    }
+
+    .search-box input {
+      flex: 1;
+      padding: 12px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px 0 0 4px;
+    }
+
+    .search-box button {
+      padding: 12px 20px;
+      background-color: #00008b;
+      color: white;
+      border: none;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+    }
+
+    .search-box button:hover {
+      background-color: #000066;
+    }
+
+    .results {
+      background-color: #ffffff;
+      border-radius: 8px;
+      padding: 1rem;
+      border: 1px solid #ddd;
+    }
+
+    .results h2 {
+      margin-top: 0;
+      color: #b22222;
+    }
+
+    .word-of-the-day {
+      background-color: #fff4f4;
+      padding: 1rem;
+      border-left: 6px solid #ff4500;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+
+    .recent-searches ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .recent-searches li {
+      margin: 0.5rem 0;
+    }
+
+    .recent-searches a {
+      text-decoration: none;
+      color: #00008b;
+      cursor: pointer;
+    }
+
+    .recent-searches a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      background-color: #b22222;
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+
+    @media screen and (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+
+      .main-content, .sidebar {
+        padding: 0;
+      }
+
+      .main-content {
+        margin-bottom: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+<header style="display: flex; align-items: center; gap: 20px; justify-content: flex-start; text-align: left;">
+  <img src="no bg.png" alt="Lingwahero Logo" style="max-width: 150px; height: auto;">
+  <div>
+    <h1 style="margin: 0;">Lingwahero</h1>
+    <p style="margin: 0;">I-explore ang kahulugan ng mga salitang Filipino</p>
+
+  </div>
+</header>
+
+</header>
+
+<nav>
+  <a href="#">Home</a>
+  <a href="#">Salita ng Araw</a>
+<a href="language quiz .html" onclick="about()">Language Game</a>
+<a href="Alamin Baybayin Game.html" onclick="loadPage('web.html')">Baybayin Game</a>
+ <a href="#" onclick="showAllWords()">Ipakita ang Buong Listahan ng mga Salita</a>
+</nav>
+
+<div class="container">
+  <div class="main-content">
+
+    <section class="search-section">
+      <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Maghanap ng salita..." />
+        <button onclick="handleSearch()">Hanapin</button>
+      </div>
+      <div class="results" id="resultArea">
+        <h2>Kahulugan</h2>
+        <p>I-type ang isang salita sa itaas upang makita ang kahulugan nito.</p>
+      </div>
+    </section>
+
+    <section class="word-of-the-day">
+      <h2>Salita ng Araw: <em>makisig</em></h2>
+      <p><strong>Pagbigkas:</strong> /ma·ki·sig/</p>
+      <p><strong>Panlapi:</strong> pang-uri</p>
+      <p><strong>Kahulugan:</strong> Maganda at kaaya-ayang tingnan, karaniwang tumutukoy sa isang lalaki.</p>
+      <p><strong>Halimbawa:</strong> Makisig ang binatang dumaan sa harap ng tindahan.</p>
+    </section>
+
+    <section id="all-words" style="display: none;">
+      <h2>Lahat ng Salita</h2>
+      <div id="allWordsList"></div>
+    </section>
+
+  </div>
+
+  <aside class="sidebar">
+    <div class="recent-searches">
+      <h3>Mga Kamakailang Paghahanap</h3>
+      <ul id="recentList"></ul>
+    </div>
+  </aside>
+</div>
+
+<footer>
+  &copy; 2025 LingwangHero. By Lim/Clacio/Castillo.
+</footer>
+
+<script>
+  const dictionary = {
+  "araw": {
+    "tagalog": "araw",
+    "cebuano": "adlaw",
+    "ilocano": "aldao",
+    "hiligaynon": "adlaw",
+    "english": "day / sun",
+    "meaning": {
+      "tagalog": "Ang panahon ng liwanag sa pagitan ng isang gabi at ang susunod na gabi, o ang bituin na nasa gitna ng ating solar system na nagbibigay ng liwanag at init.",
+      "cebuano": "Ang panahon nga adunay kahayag taliwala sa gabii ug sunod nga gabii, o ang bituon sa tunga-tunga sa atong solar system nga naghatag ug kahayag ug kainit.",
+      "ilocano": "Ti oras ti lawag iti tunggal rabii ken sumarsaruno nga rabii, wenno ti bituen a nasa tengnga ti sistema ti adlaw nga mangted iti lawag ken init.",
+      "hiligaynon": "Ang panahon nga may kahayag tunga sang gab-i kag sunod nga gab-i, ukon ang bituon nga yara sa tunga sang aton solar system nga nagahatag sang kahayag kag init.",
+      "english": "The period of light between one night and the next, or the star at the center of the solar system that provides light and heat."
+    }
+  },
+  "gabi": {
+    "tagalog": "gabi",
+    "cebuano": "gabii",
+    "ilocano": "rabi-i",
+    "hiligaynon": "gab-i",
+    "english": "night",
+    "meaning": {
+      "tagalog": "Ang oras ng araw mula sa paglubog ng araw hanggang sa pagsikat ng araw.",
+      "cebuano": "Ang panahon gikan sa paglubog sa adlaw hangtod sa pagsubang adlaw.",
+      "ilocano": "Ti oras manipud iti panagpadigo ti init aginggana iti panagbaba ti init.",
+      "hiligaynon": "Ang oras halin sa paglubog sang adlaw tubtob sa pagsalum sang adlaw.",
+      "english": "The time of day between sunset and sunrise, when it is dark outside."
+    }
+  },
+  "makisig": {
+    "tagalog": "makisig",
+    "cebuano": "gwapo",
+    "ilocano": "nalaing",
+    "hiligaynon": "gwapo",
+    "english": "handsome / dashing",
+    "meaning": {
+      "tagalog": "Isang termino na ginagamit upang ilarawan ang isang lalaki na maganda o kaakit-akit.",
+      "cebuano": "Usa ka termino nga gigamit aron ilarawan ang usa ka lalaki nga gwapo o maayo tan-awon.",
+      "ilocano": "Usar ti termino a mangiladawan iti lalaki nga napintas wenno naimbag a laing.",
+      "hiligaynon": "Isa ka termino nga ginagamit para ilarawan ang lalaki nga gwapo ukon maayu tan-awon.",
+      "english": "A term used to describe someone, usually a man, who is attractive or good-looking."
+    }
+  },
+  "kaibigan": {
+    "tagalog": "kaibigan",
+    "cebuano": "amigo/amiga",
+    "ilocano": "gagayem",
+    "hiligaynon": "abyan",
+    "english": "friend",
+    "meaning": {
+      "tagalog": "Isang tao na may matibay na ugnayan o relasyon sa isa pang tao, karaniwang batay sa pagkakaibigan, tiwala, at suportahan.",
+      "cebuano": "Usa ka tawo nga adunay lig-on nga relasyon o kasabutan sa usa pa ka tawo, kasagaran nagbase sa pagkahigala, pagsalig, ug pagsuporta.",
+      "ilocano": "Maysa a tao a naikkan iti napigsa nga relasyon wenno kasangayan iti sabali a tao, kadawyan a nakabase iti pagkakaibigan, panagtalek, ken suporta.",
+      "hiligaynon": "Isa ka tawo nga may lig-on nga relasyon ukon koneksyon sa iban nga tawo, kasagaran base sa pagkahigala, pagsalig, kag suporta.",
+      "english": "A person with whom one has a strong bond or relationship, typically based on friendship, trust, and support."
+    }
+  },
+  "tahanan": {
+    "tagalog": "tahanan",
+    "cebuano": "balay",
+    "ilocano": "balay",
+    "hiligaynon": "balay",
+    "english": "home",
+    "meaning": {
+      "tagalog": "Isang lugar kung saan nakatira ang isang pamilya o tao, ang tahanan ay karaniwang may mga kagamitan at mga kagamitan upang makapagbigay ng kaligtasan at kaginhawaan.",
+      "cebuano": "Usa ka lugar diin ang usa ka pamilya o tawo nagpuyo, ang balay kasagaran adunay mga gamit ug mga gamit aron maghatag ug kaluwasan ug kahupayan.",
+      "ilocano": "Maysa a lugar a pagnaedanda iti maysa a pamilya wenno tao, ti balay kadawyan adda dagiti gamit ken kagamitan a mangited ti kasiguruhan ken kalikagum.",
+      "hiligaynon": "Isa ka lugar nga ginapuy-an sang pamilya ukon tawo, ang balay kasagaran may mga gamit kag mga gamit para maghatag sang kasiguruhan kag kahupayan.",
+      "english": "A place where a family or person lives, typically with furnishings and equipment to provide safety and comfort."
+    }
+  },
+  "puno": {
+    "tagalog": "puno",
+    "cebuano": "kahoy",
+    "ilocano": "kayu",
+    "hiligaynon": "kahoy",
+    "english": "tree",
+    "meaning": {
+      "tagalog": "Isang halaman na may matigas na katawan at mga sanga na nagdadala ng mga dahon, bulaklak, o prutas.",
+      "cebuano": "Usa ka tanom nga adunay lig-on nga lawas ug mga sanga nga nagdala sa mga dahon, mga bulak, o mga prutas.",
+      "ilocano": "Maysa a tanem nga adda napigsa a lawas ken dagiti sanga nga mangipaay iti dagiti daga, sabong, wenno prutas.",
+      "hiligaynon": "Isa ka tanom nga may lig-on nga lawas kag mga sanga nga nagadala sang mga dahon, mga bulak, ukon mga prutas.",
+      "english": "A plant with a strong stem or trunk, branches, and leaves, typically bearing flowers or fruit."
+    }
+  },
+  "mahal": {
+    "tagalog": "mahal",
+    "cebuano": "mahal",
+    "ilocano": "mahal",
+    "hiligaynon": "mahal",
+    "english": "expensive / dear / loved one",
+    "meaning": {
+      "tagalog": "Isang bagay na may mataas na halaga o presyo, o isang tao na may mahalagang halaga sa ating puso.",
+      "cebuano": "Usa ka butang nga adunay taas nga bili o presyo, o usa ka tawo nga adunay bili sa atong kasingkasing.",
+      "ilocano": "Maysa a banag nga adda nangato a balor wenno presyo, wenno maysa a tao nga adda nangato a bili iti pusom.",
+      "hiligaynon": "Isa ka bagay nga may mataas nga bili o presyo, o isa ka tawo nga may daku nga bili sa aton tagipusuon.",
+      "english": "A thing that has a high value or price, or a person who is dear to one's heart."
+    }
+  },
+  "pag-ibig": {
+    "tagalog": "pag-ibig",
+    "cebuano": "gugma",
+    "ilocano": "ay-ayaten",
+    "hiligaynon": "gugma",
+    "english": "love",
+    "meaning": {
+      "tagalog": "Isang malalim na pakiramdam ng pagkagusto at pagpapahalaga sa isang tao, bagay, o ideya.",
+      "cebuano": "Usa ka lawom nga pagbati sa pagkapareho ug pag-apresyar sa usa ka tawo, butang, o ideya.",
+      "ilocano": "Maysa a naimbag nga panagkidduwa ti pagkasarsarita ken panagdayaw iti maysa a tao, banag, wenno ideya.",
+      "hiligaynon": "Isa ka malalom nga pagbati sa pagkahamtang kag pag-apresyar sa isa ka tawo, bagay, ukon ideya.",
+      "english": "A deep feeling of affection and appreciation for a person, thing, or idea."
+    }
+  }
+};
+;
+
+  const searchInput = document.getElementById('searchInput');
+  const resultArea = document.getElementById('resultArea');
+  const recentList = document.getElementById('recentList');
+  const allWordsList = document.getElementById('allWordsList');
+  const allWordsSection = document.getElementById('all-words');
+
+  function handleSearch() {
+    const term = searchInput.value.trim().toLowerCase();
+    if (!term) return;
+
+    displayResult(term);
+    saveToLocalStorage(term);
+    updateRecentSearches();
+    searchInput.value = '';
+  }
+
+  function displayResult(word) {
+    const meaning = dictionary[word];
+    if (meaning) {
+      resultArea.innerHTML = `
+        <h2>${word}</h2>
+        <p><strong>Kahulugan (Tagalog):</strong> ${meaning.meaning.tagalog}</p>
+        <p><strong>Kahulugan (Cebuano):</strong> ${meaning.meaning.cebuano}</p>
+        <p><strong>Kahulugan (Ilocano):</strong> ${meaning.meaning.ilocano}</p>
+        <p><strong>Kahulugan (Hiligaynon):</strong> ${meaning.meaning.hiligaynon}</p>
+        <p><strong>Kahulugan (English):</strong> ${meaning.meaning.english}</p>
+      `;
+    } else {
+      resultArea.innerHTML = `
+        <h2>${word}</h2>
+        <p>Paumanhin, wala sa diksyunaryo ang salitang ito.</p>
+      `;
+    }
+  }
+
+  function saveToLocalStorage(term) {
+    let recent = JSON.parse(localStorage.getItem('recentSearches')) || [];
+    if (!recent.includes(term)) {
+      recent.unshift(term);
+      if (recent.length > 10) recent.pop();
+      localStorage.setItem('recentSearches', JSON.stringify(recent));
+    }
+  }
+
+  function updateRecentSearches() {
+    recentList.innerHTML = '';
+    const recent = JSON.parse(localStorage.getItem('recentSearches')) || [];
+    recent.forEach(word => {
+      const li = document.createElement('li');
+      const link = document.createElement('a');
+      link.textContent = word;
+      link.onclick = () => {
+        searchInput.value = word;
+        handleSearch();
+      };
+      li.appendChild(link);
+      recentList.appendChild(li);
+    });
+  }
+
+  function showAllWords() {
+    allWordsSection.style.display = 'block';
+    allWordsList.innerHTML = '';
+    for (const word in dictionary) {
+      const wordEntry = dictionary[word];
+      const div = document.createElement('div');
+      div.innerHTML = `
+        <h3>${word}</h3>
+        <p><strong>Kahulugan (Tagalog):</strong> ${wordEntry.meaning.tagalog}</p>
+        <p><strong>Kahulugan (Cebuano):</strong> ${wordEntry.meaning.cebuano}</p>
+        <p><strong>Kahulugan (Ilocano):</strong> ${wordEntry.meaning.ilocano}</p>
+        <p><strong>Kahulugan (Hiligaynon):</strong> ${wordEntry.meaning.hiligaynon}</p>
+        <p><strong>Kahulugan (English):</strong> ${wordEntry.meaning.english}</p>
+      `;
+      allWordsList.appendChild(div);
+    }
+  }
+  
+function about() {
+  allWordsSection.style.display = 'none'; // Hide word list if shown
+  aboutusList.innerHTML = ''; // Clear previous content if any
+
+  const aboutContent = document.createElement('div');
+  aboutContent.innerHTML = `
+    <h2>About Us</h2>
+    <p><strong>Project Name:</strong> PinoyDiksyunaryo</p>
+    <p><strong>Description:</strong> PinoyDiksyunaryo is a Filipino-themed multilingual dictionary website that translates Filipino words into English, Cebuano, Ilocano, and Hiligaynon. It aims to promote and preserve the richness of Philippine languages by providing easy access to word meanings and translations.</p>
+    <p><strong>Developed By:</strong> Group 5</p>
+    <p><strong>Members:</strong> Renz Andrei Medrick G. Lim and team</p>
+    <p><strong>Purpose:</strong> To support language education, appreciation of regional dialects, and digital innovation through a user-friendly web platform.</p>
+    <p><strong>Tools Used:</strong> HTML, CSS, JavaScript, LibreTranslate API, and Appery.io</p>
+  `;
+
+  aboutusList.appendChild(aboutContent);
+}
+
+window.onload = updateRecentSearches;
+</script>
+
+</body>
+</html>
